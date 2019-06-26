@@ -1,0 +1,105 @@
+
+{% extends 'home.html' %}
+
+{% block content %}
+<head>
+  <style>
+.card {
+        margin: 0 auto; 
+        float: none; 
+        margin-bottom: 10px; 
+
+
+ }
+button.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ button.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+}
+.modal-header-primary {
+  color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #428bca;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+
+</style>
+</head>
+
+<div class="container">
+
+    <div class="card text-center" style= "background-color: #F0F0F0;  width:70rem;">
+    <div class="border border-dark">
+      <div class="card-header"style= "background-color: #808080; color:white;">
+       <strong> NEW CATEGORY </strong>
+      </div>
+      <div class="card-body">
+    	<form method="post" action="{{url_for('newbookcat')}}">
+        	<div class="form-group col-md-6">
+              <label>Category Name :</label>
+        	    <input type="text" class="form-control" id="name" name="category_name"  placeholder="Category Name" required>
+            </div>
+        	<br>
+         <center> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+         	<span class= "glyphicon glyphicon-plus"></span>
+            Add New Category
+          </button></center>	
+        <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header-primary">
+                <div class="modal-title"><strong>CONFIRM TO ADD</strong>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-success" value="Add Category"><span class= "glyphicon glyphicon-plus"></span><strong>Add Category</strong></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

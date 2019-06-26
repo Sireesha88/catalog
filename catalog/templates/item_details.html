@@ -1,0 +1,52 @@
+
+{%extends "home.html"%}
+{%block content%}
+
+  <div class="container" style="width: 900px;">
+  <div class="border border-dark">
+	<div class="card-group">
+	
+    <div class="card">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-block text-center" >
+            <h3 class="card-title" align=center><b>Name : {{Bname}}</b></h3>
+				<div class="list-group">
+						<li class="list-group-item justify-content-between text-white"  style="background-color: #808080;"><strong>publisher : {{Bpublisher}}</strong></li>
+						<li class="list-group-item justify-content-between text-white"  style="background-color: #808080;"><strong>Price : Rs:{{Bprice}}/-</strong></li>
+						<li class="list-group-item justify-content-between text-white"  style="background-color: #808080;"><strong>pages : {{Bpages}}</strong></li>
+						<li class="list-group-item justify-content-between text-white"  style="background-color: #808080;"><strong>ISBN :  {{Bisbn}}</strong></li>
+					</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-img-bottom">
+			<img src="{{Bimage}}" class="rounded" width="420px" height="400px">
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+  </div>
+  </div>
+  
+  
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

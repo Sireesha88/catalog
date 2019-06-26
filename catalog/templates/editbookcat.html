@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+{% block content %}
+<head>
+  <style>
+    button.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+button.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+
+</style>
+<div class="container">
+     <div class="row">
+        <div class="col-md-6 offset-md-3">
+        <div class="card">
+                  <div class="card-header text-center" style="background-color: #808080 ;color:white;"><strong>Edit Category</strong></div>
+					  <ul class="list-group list-group-flush">
+                    {% for each in categoriesList %}
+					<li class="list-group-item">
+                          <form action="{{url_for('editBookscategory',category_id=each.books_id)}}" method="POST">
+							<div class="col-xs-6">
+								<label for="ex2">{{each.books_name}} :
+									 <input type="text" class="form-control" id="name" name="category_name" value="{{each.books_name}}" placeholder="category name" required>
+								</label>
+								<label>
+                                    <button type ="submit"  class="btn btn-success a-btn-slide-text">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                     <span><strong>Update Category</strong></span>
+                                    </button>
+							  </label>
+							</div>
+							 
+                        </form>
+					</li>
+					</ul>
+                    {%endfor%}
+				
+				</div>
+        </div> 
+  
+        </div>
+    </div>
+        
+</div>
+{% endblock %}

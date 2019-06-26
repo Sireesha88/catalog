@@ -1,0 +1,186 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<head>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0.2,0.5,0.7);
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0.1,0,1.5,1.0);
+  width50;
+  height:60;
+}
+.glyphicon.glyphicon-zoom-in {
+    font-size: 75px;
+}
+
+.img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.img-wrap:after {
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.3);
+  opacity: 0;
+  transition: opacity .25s;
+}
+
+.img-wrap img {
+  transition: transform .25s;
+  width: 100%;
+}
+.img-wrap:hover img {
+  transform: scale(1.2);
+}
+.img-wrap:hover:after {
+  opacity: 1;
+}
+
+.img-wrap:hover .card-img-top{
+  opacity: 0.6;
+}
+.img-wrap:hover .img {
+  opacity: 0.2;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+
+ .modal-header-primary {
+	color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #428bca;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+a.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+a.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+
+.show-on-hover {
+    display: none;
+    width: 20px;
+    height: 20px;
+	align: center;
+    position: absolute;
+    top: 45px;
+	left: 95px;
+}
+ 
+.img-wrap:hover .show-on-hover {
+    display: block;
+	color:black;
+}
+</style>
+</head>
+{% if not hasRecent%}
+
+	{%if category_id%}
+
+			<div class="card-body" align=center>
+						<a href= "{{url_for('newbookitem',categoryid=category_id)}}" class="btn btn-success a-btn-slide-text">
+							<span class="glyphicon glyphicon-plus"></span>
+							<span><strong>Add Item</strong></span>
+						</a>
+
+			</div>			
+		{% endif %}
+
+{% endif%}
+
+{% if Items %}
+<div class="container">
+	
+	<div class="row">
+
+
+	{% for each in Items %}	
+	 	<div class="col-sm-4 col-lg-4 col-md-4 py-4">
+			
+				<div class="card " style= "background-color: #F0F0F0;width: 26rem;">
+
+					<div class="border border-dark">
+					<div class="card-body">
+						<center><h5 class="card-title"><strong>{{each.item_name}}</strong></h5></center>
+					</div>
+						<div class="img-wrap">
+						 <img class="card-img-top" src="{{each.item_image}}" height="150" width="70">
+						
+						<a href="{{url_for('bookitemdetails',category_id=each.books_id,itemid=each.item_id)}}" class="show-on-hover"><span class="glyphicon glyphicon-zoom-in"></span></a>
+						
+						</div>
+					<ul class="list-group list-group-flush" align=center>
+				
+						<li class="list-group-item justify-content-between text-black" style="background-color: #F0F0F0;"><strong>Rs:{{each.item_price}}/-</strong></li>
+						<li class="list-group-item justify-content-between text-black" style="background-color: #F0F0F0;"><strong>{{each.item_publisher}}</strong></li>
+					<div class="card-body" align=center>
+						<a href="{{url_for('editbookitem',categoryid=each.books_id,itemid=each.item_id)}}"  class="btn btn-success a-btn-slide-text">
+							<span class="glyphicon glyphicon-pencil"></span>
+							<span><strong>Edit</strong></span>
+						</a>
+
+						 <a  class="btn btn-danger a-btn-slide-text text-white" data-toggle="modal" data-target="#exampleModalCenter">
+						 	<span class="glyphicon glyphicon-trash"></span>
+
+						 	<span><strong>Delete</strong></span>
+						 </a>
+						
+		</div>
+					</ul>
+								<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered">
+								    <div class="modal-content">
+								      <div class="modal-header-primary">
+        								<div class="modal-title text-center"><span><strong>Click to Confirm</strong></span>
+      										  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       										   <span aria-hidden="true">&times;</span>
+       											 </button>
+     								    </div>
+     								 </div>
+								      <div class="modal-body">
+								       <h4><strong> Delete {{Bname}}</strong></h4>
+								      </div>
+								      <div class="modal-footer">
+								        <a class="btn btn-success a-btn-slide-text text-white" data-dismiss="modal"><span><strong>Cancel</strong></span>
+								        </a>
+								       <a  href="{{url_for('deletebookitem',categoryid=each.books_id,itemid=each.item_id)}}" class="btn btn-danger a-btn-slide-text">
+								       		<span class="glyphicon glyphicon-trash"></span>
+								       			<span><strong>Delete</strong></span>
+								      </a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+					</div>
+		
+		    	</div>	
+	</div>
+
+	{% endfor %}
+	
+		</div>
+	</div>
+	
+	{% else %}
+{% endif %}
+
+{% endblock %}
+
+

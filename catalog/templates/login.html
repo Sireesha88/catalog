@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <style>
+ .card {
+        margin: 0 auto; 
+        float: none; 
+        margin-bottom: 10px; 
+		top:150px;
+}
+
+</style>
+ </head>
+ <body>
+<script>
+  function start() {
+    gapi.load('auth2', function() {
+      auth2 = gapi.auth2.init({
+        client_id: '488719811894-f6l2rojajk2qhseg3lfvj9hkusrqrvna.apps.googleusercontent.com'
+      });
+    });
+  }
+</script><br>
+
+  <div class="container">
+  <div class="card text-center" style= "background-color: #F0F0F0; width:20rem;">
+  <div class="border border-dark">
+    <div class="card-header">
+      <strong>SIGN-IN TO BOOKS STORE</strong>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>Sign-in from your account</strong></p>
+  	<button class="btn btn-primary" id="signinButton">
+  	Google Sign-in
+  	</button>
+    </div>
+  </div>
+  </div>
+  </div>
+
+<script>
+  $('#signinButton').click(function() {
+    function signInCallback(authResult){
+      if (authResult['code']){
+        $('#signinButton').attr('style', 'display: none');
+        $.ajax({
+          type: 'POST',
+          url: '/gconnect?state={{STATE}}',
+          headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+          },
+          contentType: 'application/octet-stream; charset=utf-8',
+          success:function(result){
+            $('#result').html('<h3>wait for a moment</h3>')
+                 setTimeout(function() {
+                  window.location.href = "http://localhost:5000/home";
+                 }, 2000);
+          },
+          processData:false,
+          data:authResult['code']
+        });
+      } else{
+        console.log('There was an error: ' + authResult['error']);
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+      }
+    }
+    auth2.grantOfflineAccess().then(signInCallback);
+  });
+</script>
+</body>
+</html>

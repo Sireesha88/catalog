@@ -1,0 +1,60 @@
+
+{% extends 'home.html' %}
+{% block content %}
+<head>
+<style>
+      @keyframes check {0% {height: 0;width: 0;}
+    25% {height: 0;width: 10px;}
+    50% {height: 20px;width: 10px;}
+  }
+  .checkbox{background-color:#fff;display:inline-block;height:28px;margin:0 .25em;width:28px;border-radius:4px;border:1px solid #ccc;float:right}
+  .checkbox span{display:block;height:28px;position:relative;width:28px;padding:0}
+  .checkbox span:after{-moz-transform:scaleX(-1) rotate(135deg);-ms-transform:scaleX(-1) rotate(135deg);-webkit-transform:scaleX(-1) rotate(135deg);transform:scaleX(-1) rotate(135deg);-moz-transform-origin:left top;-ms-transform-origin:left top;-webkit-transform-origin:left top;transform-origin:left top;border-right:4px solid #fff;border-top:4px solid #fff;content:'';display:block;height:20px;left:3px;position:absolute;top:15px;width:10px}
+  .checkbox span:hover:after{border-color:#999}
+  .checkbox input{display:none}
+  .checkbox input:checked + span:after{-webkit-animation:check .8s;-moz-animation:check .8s;-o-animation:check .8s;animation:check .8s;border-color:#555}
+.checkbox input:checked + .primary:after{border-color:#2196F3}
+button.btn:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+button.btn {
+     -webkit-transform: scale(0.8);
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+     bottom:10px;
+	 top:10px;
+ }
+</style>
+</head>
+
+<div class="container">
+    <form action="{{url_for('deleteCat')}}" method="POST">
+     <div class="row">
+        <div class="col-md-6 offset-md-3">
+        <div class="card">
+                <div class="card-header text-center" style="background-color: #808080 ;color:white;"><strong>Check for Categories</strong></div>
+                <ul class="list-group list-group-flush">
+                    {% for book in books %}  
+                    <li class="list-group-item">
+                          {{book.books_name}}
+                          <label class="checkbox">
+                                        <input type="checkbox" id="{{book.books_id}}" name="chbox{{book.books_id}}" value="{{book.books_id}}"/>   
+                                        <span class="primary"></span>
+                          </label>
+                    </li>
+                      {%endfor%}
+                  <div>
+						<center><button type="submit" class="btn btn-danger" ><span class="glyphicon glyphicon-trash"></span>Delete Category</button></center>
+                     </div>
+                </ul>
+            </div> 
+            </div>
+            </div>
+    </form>
+</div>
+{% endblock %}
